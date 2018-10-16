@@ -5,7 +5,6 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 网络上中文资料很少，尤其是8代CPU的XPS。而我又是一个原版镜像控，又追求最新版的系统和软件，资料更是少之又少。搞这个东西前前后后搞了一个多月，系统崩溃重装无数次，现在终于稳定，各项功能基本和白苹果一致，故记录成文给后来者一个参考。
 
 
-
 ## 硬件配置参考
 
 - 型号：XPS13-9360
@@ -71,7 +70,7 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macOS\ Mojave.app --nointeraction
 ```
 
-![# hjk @ Dot in [15:29:45]  $ sudo /AppItcations/InstaII\ macOS\ Mojave.app/Contents/Resources/createinstaIImedta  --volume /VoIumes  (USB --applicattonpath (Applications/lnstall\ macOS\ Mojaye,.pp --nointeraction  Password :  WARNING  : "--applicationpath" is deprecated in macOS 10.14 and greater. Please remove it from your invoc  at ion.  90%... 100%  Erasing disk: 0%... 10%... 20%... 30%... 100%  Copying to disk: 0%... 10%... 20%... 30%... 40%...  Making disk bootable...  Copying boot files...  50%. ..  60%...  70%. ..  80%. ..  Install media now available at "/Volumes/Install macOS Mojave" ](/Users/hjk/workspace/XPS13-9360-i5-8250U-macOS/docs/create-usb.png)
+![create-usb](docs/create-usb.png)
 
 4. 用tools目录下的Clover Configuration挂载EFI分区（注意区分是不是U盘，不要挂错了），然后把所有东西复制到EFI分区的EFI目录内。
 
@@ -179,7 +178,7 @@ setup_var 0x786 0x03
 
 到目前为止，启动还是通过U盘里的CLOVER引导的，所以第一件事情是把CLOVER安装到硬盘上。同样用Clover Configuration挂载硬盘的EFI分区，和U盘一样，把文件复制进去，大概如下所示。
 
-![image-20181016133944461](/Users/hjk/workspace/XPS13-9360-i5-8250U-macOS/docs/efi-list.png)
+![image-20181016133944461](docs/efi-list.png)
 
 然后运行终端，cd到该目录下，运行如下几条命令：
 
@@ -192,21 +191,21 @@ bash XPS9360.sh --disable-touchid
 
 然后用Clover Configuration随机生成以下几个序列号：
 
-![image-20181016134503963](/Users/hjk/workspace/XPS13-9360-i5-8250U-macOS/docs/smbios.png)
+![image-20181016134503963](docs/smbios.png)
 
-![image-20181016134704814](/Users/hjk/workspace/XPS13-9360-i5-8250U-macOS/docs/serial.png)
+![image-20181016134704814](docs/serial.png)
 
-![image-20181016134831948](/Users/hjk/workspace/XPS13-9360-i5-8250U-macOS/docs/uuid.png)
+![image-20181016134831948](docs/uuid.png)
 
 接着打开EFI/tools里面的Kext Wizard程序，把EFI/kexts/Library-Extensions里面的三个kext文件安装到/System/Library/Extensions/目录：
 
-![image-20181016135223846](/Users/hjk/workspace/XPS13-9360-i5-8250U-macOS/docs/kexts.png)
+![image-20181016135223846](docs/kexts.png)
 
 整个安装过程到此就全部结束了，可以重启试试是不是所有功能都运行正常。如果不正常的话，需要自己检查一下问题出在哪里。
 
 如果觉得有帮助的话，欢迎打赏。
 
-![wepay](/Users/hjk/workspace/XPS13-9360-i5-8250U-macOS/docs/wepay.jpg)
+![wepay](docs/wepay.jpg)
 
 ## Credits
 
