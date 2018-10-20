@@ -8,7 +8,7 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 ## 硬件配置参考
 
 - 型号：XPS13-9360
-- CPU：Intel i5-8350U
+- CPU：Intel i5-8250U
 - GPU：Intel UHD Graphics 620
 - 内存：8GB
 - 显示器：1920x1080
