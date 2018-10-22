@@ -184,7 +184,7 @@ setup_var 0x786 0x03
 
 ```bash
 bash XPS9360.sh --compile-dsdt
-bash XPS9360.sh --pach-hda
+bash XPS9360.sh --patch-hda
 bash XPS9360.sh --enable-3rdparty
 bash XPS9360.sh --disable-touchid
 ```
