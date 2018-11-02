@@ -2,6 +2,8 @@
 
 Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 
+update:系统更新为10.14.1运行正常
+
 网络上中文资料很少，尤其是8代CPU的XPS。而我又是一个原版镜像控，又追求最新版的系统和软件，资料更是少之又少。搞这个东西前前后后搞了一个多月，系统崩溃重装无数次，现在终于稳定，各项功能基本和白苹果一致，故记录成文给后来者一个参考。
 
 
@@ -201,6 +203,11 @@ bash XPS9360.sh --disable-touchid
 接着打开EFI/tools里面的Kext Wizard程序，把EFI/kexts/Library-Extensions里面的三个kext文件安装到/System/Library/Extensions/目录：
 
 ![image-20181016135223846](docs/kexts.png)
+
+## 解决没有声音的办法
+删除`/Library/Extensions/AppleHDA_ALC256.kext`文件，然后用Kext Wizard程序重建缓存
+
+参考<https://github.com/the-darkvoid/XPS9360-macOS/issues/85#issuecomment-426494719>
 
 整个安装过程到此就全部结束了，可以重启试试是不是所有功能都运行正常。如果不正常的话，需要自己检查一下问题出在哪里。
 
