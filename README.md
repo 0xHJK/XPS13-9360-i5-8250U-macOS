@@ -217,6 +217,36 @@ bash XPS9360.sh --disable-touchid
 
 ![wepay](docs/wepay.jpg)
 
+## 解决无法连接app store的办法
+连接不上app store的核心原因在于网卡名字不是`en0`，这个可以通过`ifconfig -a`或「关于本机-系统报告-Wi-Fi」处查看。
+
+首先，删除网络偏好设置中所有网卡。
+
+然后在`/Library/Preferences/SystemConfiguration/com.apple.Boot.plist`中添加
+```
+<key>EthernetBuiltIn</key>
+<string>Yes</string>
+```
+这里应该需要root权限，可以先用`sudo -i`切换到root。我修改完的文件参考如下：
+```
+$ cat com.apple.Boot.plist
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EthernetBuiltIn</key>
+	<string>Yes</string>
+	<key>Kernel Flags</key>
+	<string></string>
+</dict>
+</plist>
+```
+
+最后删除`/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist`重启即可。
+
+注意：如果不放心的话，以上步骤建议可以先备份原文件
+
 ## Credits
 
 - [Dell XPS 13 9360 Guide by bozma88](https://www.tonymacx86.com/threads/guide-dell-xps-13-9360-on-macos-sierra-10-12-x-lts-long-term-support-guide.213141/)
