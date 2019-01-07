@@ -211,12 +211,6 @@ bash XPS9360.sh --disable-touchid
 
 参考<https://github.com/the-darkvoid/XPS9360-macOS/issues/85#issuecomment-426494719>
 
-整个安装过程到此就全部结束了，可以重启试试是不是所有功能都运行正常。如果不正常的话，需要自己检查一下问题出在哪里。
-
-如果觉得有帮助的话，欢迎打赏。
-
-![wepay](docs/wepay.jpg)
-
 ## 解决无法连接app store的办法
 连接不上app store的核心原因在于网卡名字不是`en0`，这个可以通过`ifconfig -a`或「关于本机-系统报告-Wi-Fi」处查看。
 
@@ -246,6 +240,14 @@ $ cat com.apple.Boot.plist
 最后删除`/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist`重启即可。
 
 注意：如果不放心的话，以上步骤建议可以先备份原文件
+
+
+# The End
+整个安装过程到此就全部结束了，可以重启试试是不是所有功能都运行正常。如果不正常的话，需要自己检查一下问题出在哪里。
+
+建议认真看一看[READ FIRST! Laptop Frequent Questions](https://www.tonymacx86.com/threads/faq-read-first-laptop-frequent-questions.164990/)
+
+如果碰到问题，欢迎在issues中提出，如果有解决办法也欢迎补充。
 
 ## Credits
 
