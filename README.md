@@ -251,10 +251,10 @@ $ cat com.apple.Boot.plist
 
 ## 推广链接
 欢迎点击我的推广链接购买
-XPS13 京东自营：<https://u.jd.com/3IjxzB>
-XPS13 京东自营 白色：<https://u.jd.com/pEEwgl>
-DA300转换适配器 京东自营：<https://u.jd.com/ONafW4>
-DA200转换适配器 京东自营：<https://u.jd.com/TFBA2u>
+- XPS13 京东自营：<https://u.jd.com/3IjxzB>
+- XPS13 京东自营 白色：<https://u.jd.com/pEEwgl>
+- DA300转换适配器 京东自营：<https://u.jd.com/ONafW4>
+- DA200转换适配器 京东自营：<https://u.jd.com/TFBA2u>
 
 ## Credits
 
