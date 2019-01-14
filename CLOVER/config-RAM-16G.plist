@@ -569,6 +569,41 @@
 		<dict>
 			<key>Channels</key>
 			<integer>2</integer>
+			<key>Modules</key>
+			<array>
+				<dict>
+					<key>Frequency</key>
+					<integer>2133</integer>
+					<key>Part</key>
+					<string>H9CCNNNCLGALAR-NVD</string>
+					<key>Serial</key>
+					<string>72DC3603</string>
+					<key>Size</key>
+					<integer>8192</integer>
+					<key>Slot</key>
+					<integer>1</integer>
+					<key>Type</key>
+					<string>DDR3</string>
+					<key>Vendor</key>
+					<string>SK Hynix</string>
+				</dict>
+				<dict>
+					<key>Frequency</key>
+					<integer>2133</integer>
+					<key>Part</key>
+					<string>H9CCNNNCLGALAR-NVD</string>
+					<key>Serial</key>
+					<string>72DC3304</string>
+					<key>Size</key>
+					<integer>8192</integer>
+					<key>Slot</key>
+					<integer>2</integer>
+					<key>Type</key>
+					<string>DDR3</string>
+					<key>Vendor</key>
+					<string>SK Hynix</string>
+				</dict>
+			</array>
 			<key>SlotCount</key>
 			<integer>2</integer>
 		</dict>
