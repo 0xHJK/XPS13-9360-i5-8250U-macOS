@@ -2,12 +2,12 @@
 
 Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 
-update:系统更新为10.14.1运行正常
-
-update:系统更新为10.14.2触控板找不到，已经更新触控板驱动，运行正常
-
 网络上中文资料很少，尤其是8代CPU的XPS。而我又是一个原版镜像控，又追求最新版的系统和软件，资料更是少之又少。搞这个东西前前后后搞了一个多月，系统崩溃重装无数次，现在终于稳定，各项功能基本和白苹果一致，故记录成文给后来者一个参考。
 
+## 更新记录
+- 2019-01-14 修正内存显示与实际情况不一致的问题。建议自行在“SMBIOS->Memory”一栏自行补充内存信息，写法参考config-RAM-16G.plist文件
+- 2018-12-21 系统更新为10.14.2 出现找不到触控板的情况，已经更新触控板驱动，现在运行正常。如果出现触控板问题请重新安装触控板驱动：<https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller>
+- 2018-11-02 系统更新为10.14.1 运行正常
 
 ## 硬件配置参考
 
@@ -242,14 +242,14 @@ $ cat com.apple.Boot.plist
 注意：如果不放心的话，以上步骤建议可以先备份原文件
 
 
-# The End
+## The End
 整个安装过程到此就全部结束了，可以重启试试是不是所有功能都运行正常。如果不正常的话，需要自己检查一下问题出在哪里。
 
 建议认真看一看[READ FIRST! Laptop Frequent Questions](https://www.tonymacx86.com/threads/faq-read-first-laptop-frequent-questions.164990/)
 
 如果碰到问题，欢迎在issues中提出，如果有解决办法也欢迎补充。
 
-# 推广链接
+## 推广链接
 欢迎点击我的推广链接购买
 XPS13 京东自营：<https://u.jd.com/3IjxzB>
 XPS13 京东自营 白色：<https://u.jd.com/pEEwgl>
