@@ -4,8 +4,15 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 
 网络上中文资料很少，尤其是8代CPU的XPS。而我又是一个原版镜像控，又追求最新版的系统和软件，资料更是少之又少。搞这个东西前前后后搞了一个多月，系统崩溃重装无数次，现在终于稳定，各项功能基本和白苹果一致，故记录成文给后来者一个参考。
 
+建了一个QQ群，方便交流：980197002
+
+> ⚠警告：安装和使用黑苹果时经常会碰到意外，**千万千万要做好数据备份**
+>
+> ⚠建议：安装完成后关闭系统更新，更新比较容易出问题
+
 ## 更新记录
-- 2019-01-14 修正内存显示与实际情况不一致的问题。建议自行在“SMBIOS->Memory”一栏自行补充内存信息，写法参考config-RAM-16G.plist文件
+- 2019-04-05 今天手贱更新10.14.4结果启动不起来了，然后又重新搞了一份配置，更新了驱动，顺便解决了很多人碰到的声音问题。目前系统运行正常
+- 2019-01-14 修正内存显示与实际情况不一致的问题。建议自行在“SMBIOS->Memory”一栏自行补充内存信息，写法参考config-example.plist文件
 - 2018-12-21 系统更新为10.14.2 出现找不到触控板的情况，已经更新触控板驱动，现在运行正常。如果出现触控板问题请重新安装触控板驱动：<https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller>
 - 2018-11-02 系统更新为10.14.1 运行正常
 
@@ -32,8 +39,6 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 
 - 系统：macOS 10.14 Mojave（单系统，没有Windows）
 - BIOS：2.9.1
-
-
 
 ## 使用情况说明
 
@@ -75,7 +80,7 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macOS\ Mojave.app --nointeraction
 ```
 
-![create-usb](docs/create-usb.png)
+![create-usb](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/create-usb.png)
 
 4. 用tools目录下的Clover Configuration挂载EFI分区（注意区分是不是U盘，不要挂错了），然后把所有东西复制到EFI分区的EFI目录内。
 
@@ -183,33 +188,46 @@ setup_var 0x786 0x03
 
 到目前为止，启动还是通过U盘里的CLOVER引导的，所以第一件事情是把CLOVER安装到硬盘上。同样用Clover Configuration挂载硬盘的EFI分区，和U盘一样，把文件复制进去，大概如下所示。
 
-![image-20181016133944461](docs/efi-list.png)
+![image-20181016133944461](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/efi-list.png)
 
-然后运行终端，cd到该目录下，运行如下几条命令：
+然后运行终端，cd到该目录下，根据需要运行以下命令：
 
 ```bash
+# 编译DSDT
 bash XPS9360.sh --compile-dsdt
-bash XPS9360.sh --patch-hda
+# 允许安装第三方程序
 bash XPS9360.sh --enable-3rdparty
+# 禁用TOUCHID
 bash XPS9360.sh --disable-touchid
+```
+
+然后进入ComboJack目录，运行如下命令解决耳机没有声音的问题：
+
+```bash
+bash install.sh
 ```
 
 然后用Clover Configuration随机生成以下几个序列号：
 
-![image-20181016134503963](docs/smbios.png)
+![image-20181016134503963](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/smbios.png)
 
-![image-20181016134704814](docs/serial.png)
+![image-20181016134704814](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/serial.png)
 
-![image-20181016134831948](docs/uuid.png)
+![image-20181016134831948](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/uuid.png)
 
-接着打开EFI/tools里面的Kext Wizard程序，把EFI/kexts/Library-Extensions里面的三个kext文件安装到/System/Library/Extensions/目录：
+接着打开`EFI/tools`里面的Kext Wizard程序，把`EFI/kexts/Library-Extensions`里面的`BrcmFirewareRepo.kext`和`BrcmPatchRAM2.kext`文件安装到`/System/Library/Extensions/`目录，安装完成后需要重建缓存：
 
-![image-20181016135223846](docs/kexts.png)
+![image-20181016135223846](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/kexts.png)
 
-## 解决没有声音的办法
-删除`/Library/Extensions/AppleHDA_ALC256.kext`文件，然后用Kext Wizard程序重建缓存
+## 解决耳机没有声音的办法
+进入`EFI/ComboJack`目录，运行命令`bash install.sh`
 
-参考<https://github.com/the-darkvoid/XPS9360-macOS/issues/85#issuecomment-426494719>
+参考
+
+- <https://github.com/the-darkvoid/XPS9360-macOS/issues/115#issuecomment-463154229>
+- <https://github.com/hackintosh-stuff/ComboJack>
+
+
 
 ## 解决无法连接app store的办法
 连接不上app store的核心原因在于网卡名字不是`en0`，这个可以通过`ifconfig -a`或「关于本机-系统报告-Wi-Fi」处查看。
@@ -262,4 +280,5 @@ $ cat com.apple.Boot.plist
 - [macOS on Dell XPS 9360](https://github.com/the-darkvoid/XPS9360-macOS)
 - [OS-X-BrcmPatchRAM](https://github.com/RehabMan/OS-X-BrcmPatchRAM)
 - [READ FIRST! Laptop Frequent Questions](https://www.tonymacx86.com/threads/faq-read-first-laptop-frequent-questions.164990/)
+- https://github.com/hackintosh-stuff/ComboJack
 - 以及其他工具、kext、文章贡献者
