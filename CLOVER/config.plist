@@ -4,14 +4,6 @@
 <dict>
 	<key>ACPI</key>
 	<dict>
-		<key>##ResetAddress</key>
-		<string>0x0</string>
-		<key>##ResetValue</key>
-		<string>0x0</string>
-		<key>#ResetAddress</key>
-		<string>0xB2</string>
-		<key>#ResetValue</key>
-		<string>0x73</string>
 		<key>DSDT</key>
 		<dict>
 			<key>DropOEM_DSM</key>
@@ -48,6 +40,8 @@
 				<false/>
 				<key>FixHPET</key>
 				<false/>
+				<key>FixHeaders</key>
+				<true/>
 				<key>FixIDE</key>
 				<false/>
 				<key>FixIPIC</key>
@@ -81,7 +75,7 @@
 			<array>
 				<dict>
 					<key>Comment</key>
-					<string>change _DSM to XDSM</string>
+					<string>change _DSM to XDSM (GFX0/IGPU)</string>
 					<key>Disabled</key>
 					<false/>
 					<key>Find</key>
@@ -92,12 +86,72 @@
 					<data>
 					WERTTQ==
 					</data>
+					<key>TgtBridge</key>
+					<data>
+					R0ZYMA==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change GFX0 to IGPU, optionally pair with SSDT-IGPU.aml</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					R0ZYMA==
+					</data>
+					<key>Replace</key>
+					<data>
+					SUdQVQ==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change _DSM to XDSM (HDAS/HDEF)</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					X0RTTQ==
+					</data>
+					<key>Replace</key>
+					<data>
+					WERTTQ==
+					</data>
+					<key>TgtBridge</key>
+					<data>
+					SERBUw==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change HDAS to HDEF, optionally pair with SSDT-HDEF.aml</string>
+					<key>Find</key>
+					<data>
+					SERBUw==
+					</data>
+					<key>Replace</key>
+					<data>
+					SERFRg==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change _DSM to XDSM (LPCB)</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					TFBDQhQbX0RTTQw=
+					</data>
+					<key>Replace</key>
+					<data>
+					TFBDQhQbWERTTQw=
+					</data>
 				</dict>
 				<dict>
 					<key>Comment</key>
 					<string>change OSID to XSID (to avoid match against _OSI XOSI patch)</string>
-					<key>Disabled</key>
-					<false/>
 					<key>Find</key>
 					<data>
 					T1NJRA==
@@ -110,8 +164,6 @@
 				<dict>
 					<key>Comment</key>
 					<string>change _OSI to XOSI, pair with SSDT-XOSI.aml</string>
-					<key>Disabled</key>
-					<false/>
 					<key>Find</key>
 					<data>
 					X09TSQ==
@@ -137,37 +189,7 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change GFX0 to IGPU, optionally pair with SSDT-IGPU.aml</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					R0ZYMA==
-					</data>
-					<key>Replace</key>
-					<data>
-					SUdQVQ==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change HDAS to HDEF, optionally pair with SSDT-HDEF.aml</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					SERBUw==
-					</data>
-					<key>Replace</key>
-					<data>
-					SERFRg==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
 					<string>Change HECI To IMEI</string>
-					<key>Disabled</key>
-					<false/>
 					<key>Find</key>
 					<data>
 					SEVDSQ==
@@ -180,8 +202,6 @@
 				<dict>
 					<key>Comment</key>
 					<string>change SAT0 to SATA, optionally pair with SSDT-SATA.aml</string>
-					<key>Disabled</key>
-					<false/>
 					<key>Find</key>
 					<data>
 					U0FUMA==
@@ -254,15 +274,11 @@
 					<false/>
 					<key>Find</key>
 					<data>
-					X1NUQQ==
+					FB1fU1RBAKAJk1M=
 					</data>
 					<key>Replace</key>
 					<data>
-					WFNUQQ==
-					</data>
-					<key>TgtBridge</key>
-					<data>
-					R1BJMA==
+					FB1YU1RBAKAJk1M=
 					</data>
 				</dict>
 				<dict>
@@ -277,6 +293,24 @@
 					<key>Replace</key>
 					<data>
 					WENSUw==
+					</data>
+					<key>TgtBridge</key>
+					<data>
+					VFBEMQ==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change _DSM to XDSM (TPD1/Touchpad I2C)</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					X0RTTQ==
+					</data>
+					<key>Replace</key>
+					<data>
+					WERTTQ==
 					</data>
 					<key>TgtBridge</key>
 					<data>
@@ -303,9 +337,9 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Rename XTBT to YTBT and use with SSDT-YTBT.aml for USB-C hot plug</string>
+					<string>(Old) Rename XTBT to YTBT and use with SSDT-YTBT.aml for USB-C hot plug</string>
 					<key>Disabled</key>
-					<true/>
+					<false/>
 					<key>Find</key>
 					<data>
 					pABYVEJU
@@ -313,22 +347,6 @@
 					<key>Replace</key>
 					<data>
 					pABZVEJU
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>10.11.dp1+ BT4LE-Handoff-Hotspot, credit RehabMan based on Dokterdok original</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					SIX/dEdIiwc=
-					</data>
-					<key>Name</key>
-					<string>IOBluetoothFamily</string>
-					<key>Replace</key>
-					<data>
-					Qb4PAAAA60Q=
 					</data>
 				</dict>
 			</array>
@@ -341,17 +359,20 @@
 				<key>Signature</key>
 				<string>SSDT</string>
 				<key>TableId</key>
-				<string>xh_rvp07</string>
+				<string>#TbtTypeC</string>
 			</dict>
 			<dict>
 				<key>Signature</key>
 				<string>SSDT</string>
 				<key>TableId</key>
-				<string>PtidDevc</string>
+				<string>#xh_rvp07</string>
 			</dict>
 		</array>
-		<key>FixHeaders</key>
-		<true/>
+		<key>RenameDevices</key>
+		<dict>
+			<key>_SB.PCI0.RP05.PXSX</key>
+			<string>ARPT</string>
+		</dict>
 		<key>SSDT</key>
 		<dict>
 			<key>DropOem</key>
@@ -372,6 +393,7 @@
 		</dict>
 		<key>SortedOrder</key>
 		<array>
+			<string>SSDT-Debug.aml</string>
 			<string>SSDT-XOSI.aml</string>
 			<string>SSDT-Config.aml</string>
 			<string>SSDT-IGPU.aml</string>
@@ -379,28 +401,28 @@
 			<string>SSDT-BRT6.aml</string>
 			<string>SSDT-ALS0.aml</string>
 			<string>SSDT-HDEF.aml</string>
-			<string>SSDT-ALC256.aml</string>
 			<string>SSDT-UIAC.aml</string>
 			<string>SSDT-USBX.aml</string>
 			<string>SSDT-PTSWAK.aml</string>
 			<string>SSDT-PRW.aml</string>
-			<string>SSDT-NVME.aml</string>
+			<string>#SSDT-NVME.aml</string>
 			<string>SSDT-DMAC.aml</string>
 			<string>SSDT-MCHC.aml</string>
 			<string>SSDT-MEM2.aml</string>
 			<string>SSDT-PMCR.aml</string>
-			<string>SSDT-I2C.aml</string>
 			<string>SSDT-TYPC.aml</string>
 			<string>SSDT-YTBT.aml</string>
+			<string>SSDT-I2C.aml</string>
 			<string>SSDT-LPC.aml</string>
 			<string>SSDT-SMCD.aml</string>
 			<string>SSDT-BATT.aml</string>
+			<string>SSDT-USBC.aml</string>
 		</array>
 	</dict>
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>debug=0x12a acpi_layer=0x08 acpi_level=0x02 msgbuf=512000  alcid=11</string>
+		<string>darkwake=4 igfxcflbklt=opcode</string>
 		<key>DefaultVolume</key>
 		<string>macOS</string>
 		<key>NeverHibernate</key>
@@ -410,14 +432,18 @@
 		<key>Timeout</key>
 		<integer>2</integer>
 		<key>XMPDetection</key>
-		<integer>1</integer>
+		<true/>
 	</dict>
 	<key>CPU</key>
 	<dict>
 		<key>FrequencyMHz</key>
-		<integer>2000</integer>
+		<integer>2700</integer>
 		<key>HWPEnable</key>
 		<true/>
+		<key>TDP</key>
+		<integer>50</integer>
+		<key>Type</key>
+		<string>0x706</string>
 		<key>UseARTFrequency</key>
 		<false/>
 	</dict>
@@ -428,7 +454,7 @@
 		<key>Audio</key>
 		<dict>
 			<key>Inject</key>
-			<integer>0</integer>
+			<string>0</string>
 		</dict>
 		<key>NoDefaultProperties</key>
 		<false/>
@@ -460,6 +486,8 @@
 			<key>Speed</key>
 			<integer>8</integer>
 		</dict>
+		<key>Scan</key>
+		<true/>
 		<key>ScreenResolution</key>
 		<string>1600x900</string>
 		<key>Theme</key>
@@ -467,11 +495,6 @@
 	</dict>
 	<key>Graphics</key>
 	<dict>
-		<key>EDID</key>
-		<dict>
-			<key>Inject</key>
-			<false/>
-		</dict>
 		<key>Inject</key>
 		<dict>
 			<key>ATI</key>
@@ -481,14 +504,16 @@
 			<key>NVidia</key>
 			<false/>
 		</dict>
+		<key>InjectEDID</key>
+		<false/>
 		<key>ig-platform-id</key>
 		<string>0</string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
-		<key>AppleIntelCPUPM</key>
-		<false/>
 		<key>AppleRTC</key>
+		<false/>
+		<key>AsusAICPUPM</key>
 		<false/>
 		<key>Debug</key>
 		<false/>
@@ -496,33 +521,14 @@
 		<true/>
 		<key>KernelCpu</key>
 		<false/>
+		<key>KernelHaswellE</key>
+		<false/>
 		<key>KernelLapic</key>
 		<false/>
 		<key>KernelPm</key>
 		<false/>
-		<key>KernelXCPM</key>
-		<false/>
 		<key>KextsToPatch</key>
-		<array>
-			<dict>
-				<key>Comment</key>
-				<string>change F%uT%04x to F%uTxxxx in AppleBacklightInjector.kext (credit RehabMan)</string>
-				<key>Disabled</key>
-				<false/>
-				<key>Find</key>
-				<data>
-				RiV1VCUwNHgA
-				</data>
-				<key>InfoPlistPatch</key>
-				<false/>
-				<key>Name</key>
-				<string>com.apple.driver.AppleBacklight</string>
-				<key>Replace</key>
-				<data>
-				RiV1VHh4eHgA
-				</data>
-			</dict>
-		</array>
+		<array/>
 	</dict>
 	<key>RtVariables</key>
 	<dict>
@@ -531,36 +537,40 @@
 		<key>CsrActiveConfig</key>
 		<string>0x67</string>
 		<key>ROM</key>
-		<data>
-		3+7SZ8cA
-		</data>
+		<string>UseMacAddr0</string>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
 		<key>BiosReleaseDate</key>
-		<string>08/08/2017</string>
+		<string>09/17/2018</string>
 		<key>BiosVendor</key>
 		<string>Apple Inc.</string>
 		<key>BiosVersion</key>
-		<string>MBP141.88Z.0167.B00.1708080034</string>
+		<string>MBP152.88Z.F000.B00.1809171524</string>
 		<key>Board-ID</key>
-		<string>Mac-B4831CEBD52A0C4C</string>
+		<string>Mac-827FB448E656EC26</string>
 		<key>BoardManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>BoardSerialNumber</key>
-		<string>C02734310CDF9H0FB</string>
+		<string>C02847482GUF9GYA8</string>
 		<key>BoardType</key>
 		<integer>10</integer>
 		<key>BoardVersion</key>
-		<string>MacBookPro14,1</string>
+		<string>MacBookPro15,2</string>
 		<key>ChassisAssetTag</key>
 		<string>MacBook-Aluminum</string>
 		<key>ChassisManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>ChassisType</key>
 		<string>0x09</string>
+		<key>EfiVersion</key>
+		<string>220.200.252.0.0</string>
 		<key>Family</key>
 		<string>MacBook</string>
+		<key>FirmwareFeatures</key>
+		<string>0xFC0FE137</string>
+		<key>FirmwareFeaturesMask</key>
+		<string>0xFF1FFF3F</string>
 		<key>LocationInChassis</key>
 		<string>Part Component</string>
 		<key>Manufacturer</key>
@@ -569,15 +579,52 @@
 		<dict>
 			<key>Channels</key>
 			<integer>2</integer>
+			<key>Modules</key>
+			<array>
+				<dict>
+					<key>Frequency</key>
+					<integer>2133</integer>
+					<key>Part</key>
+					<string>H9CCNNNCLGALAR-NVD</string>
+					<key>Serial</key>
+					<string>72DC3603</string>
+					<key>Size</key>
+					<integer>8192</integer>
+					<key>Slot</key>
+					<integer>1</integer>
+					<key>Type</key>
+					<string>DDR3</string>
+					<key>Vendor</key>
+					<string>SK Hynix</string>
+				</dict>
+				<dict>
+					<key>Frequency</key>
+					<integer>2133</integer>
+					<key>Part</key>
+					<string>H9CCNNNCLGALAR-NVD</string>
+					<key>Serial</key>
+					<string>72DC3304</string>
+					<key>Size</key>
+					<integer>8192</integer>
+					<key>Slot</key>
+					<integer>2</integer>
+					<key>Type</key>
+					<string>DDR3</string>
+					<key>Vendor</key>
+					<string>SK Hynix</string>
+				</dict>
+			</array>
 			<key>SlotCount</key>
 			<integer>2</integer>
 		</dict>
 		<key>Mobile</key>
 		<true/>
+		<key>PlatformFeature</key>
+		<string>0x1A</string>
 		<key>ProductName</key>
-		<string>MacBookPro14,1</string>
+		<string>MacBookPro15,2</string>
 		<key>SerialNumber</key>
-		<string>C02V81TUHV29</string>
+		<string>C02XRQY8JHCD</string>
 		<key>SmUUID</key>
 		<string>A47E7BC1-DECA-439E-A6C4-DB8B6767C700</string>
 		<key>Trust</key>
@@ -587,8 +634,6 @@
 	</dict>
 	<key>SystemParameters</key>
 	<dict>
-		<key>CustomUUID</key>
-		<string>B7D5E016-7E8F-4FF9-9B2C-E87CFF6ED022</string>
 		<key>InjectKexts</key>
 		<string>Detect</string>
 		<key>InjectSystemID</key>
