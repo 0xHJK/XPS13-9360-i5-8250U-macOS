@@ -60,6 +60,7 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 
 存在的问题：
 
+- 有时候启动会比较慢，个别时候甚至无法启动（推测可能是蓝牙原因，一般重启可以解决）
 - 外接显示器热插拔可能会导致启动故障（一般重启可解决）
 - 外接显示器开机可能会比较慢，如果无法启动可以拔了显示器重启再插上
 - 睡眠唤醒后偶尔会蓝牙不可用（一般重启可解决）
@@ -227,9 +228,35 @@ bash install.sh
 - <https://github.com/the-darkvoid/XPS9360-macOS/issues/115#issuecomment-463154229>
 - <https://github.com/hackintosh-stuff/ComboJack>
 
+## 调整开机DUANG的声音的办法
 
+如果完全不想要开机声音，最方便的方法是直接删除`EFI/CLOVER/drivers64UEFI/AudioDxe.efi`和`EFI/CLOVER/drivers64UEFI/BootChimeDxe.efi`。
+
+如果想要调小声音，那么：
+
+1. 备份`EFI/CLOVER/tools/Shell64U.efi`
+
+2. 把`EFI/CLOVER/tools/Shell64U.efi.bak`改为`EFI/CLOVER/tools/Shell64U.efi`
+
+3. 重启进入CLOVER，选择启动shell
+
+4. 依次输入以下命令
+
+   ```bash
+   # 进入fs0分区
+   fs0:
+   # 进入tools目录
+   cd EFI\CLOVER\tools
+   # 管理声音
+   BootChimeCfg.efi
+   ```
+
+![bootchime](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/bootchime.jpg)
+
+这个时候你会看到一些选项，`V`是用来调整声音大小，如`V 20`就表示声音设置到20%， `T`可以用来测试声音播放。
 
 ## 解决无法连接app store的办法
+
 连接不上app store的核心原因在于网卡名字不是`en0`，这个可以通过`ifconfig -a`或「关于本机-系统报告-Wi-Fi」处查看。
 
 首先，删除网络偏好设置中所有网卡。
