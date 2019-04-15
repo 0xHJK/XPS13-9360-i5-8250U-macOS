@@ -83,7 +83,7 @@ sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallme
 
 ![create-usb](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/create-usb.png)
 
-4. 用tools目录下的Clover Configuration挂载EFI分区（注意区分是不是U盘，不要挂错了），然后把所有东西复制到EFI分区的EFI目录内。
+4. 用tools目录下的Clover Configuration挂载**U盘的EFI分区**（注意不要挂错了），然后把所有东西复制到EFI分区的EFI目录内。
 
 
 
@@ -187,7 +187,7 @@ setup_var 0x786 0x03
 
 ## 后续设置
 
-到目前为止，启动还是通过U盘里的CLOVER引导的，所以第一件事情是把CLOVER安装到硬盘上。同样用Clover Configuration挂载硬盘的EFI分区，和U盘一样，把文件复制进去，大概如下所示。
+到目前为止，启动还是通过U盘里的CLOVER引导的，所以第一件事情是把CLOVER安装到硬盘上。同样用Clover Configuration挂载**电脑硬盘的EFI分区**，和U盘一样，把文件复制进去，大概如下所示。
 
 ![image-20181016133944461](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/efi-list.png)
 
