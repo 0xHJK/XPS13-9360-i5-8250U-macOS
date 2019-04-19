@@ -40,8 +40,6 @@
 				<false/>
 				<key>FixHPET</key>
 				<false/>
-				<key>FixHeaders</key>
-				<true/>
 				<key>FixIDE</key>
 				<false/>
 				<key>FixIPIC</key>
@@ -126,6 +124,8 @@
 				<dict>
 					<key>Comment</key>
 					<string>change HDAS to HDEF, optionally pair with SSDT-HDEF.aml</string>
+					<key>Disabled</key>
+					<false/>
 					<key>Find</key>
 					<data>
 					SERBUw==
@@ -152,6 +152,8 @@
 				<dict>
 					<key>Comment</key>
 					<string>change OSID to XSID (to avoid match against _OSI XOSI patch)</string>
+					<key>Disabled</key>
+					<false/>
 					<key>Find</key>
 					<data>
 					T1NJRA==
@@ -164,6 +166,8 @@
 				<dict>
 					<key>Comment</key>
 					<string>change _OSI to XOSI, pair with SSDT-XOSI.aml</string>
+					<key>Disabled</key>
+					<false/>
 					<key>Find</key>
 					<data>
 					X09TSQ==
@@ -190,6 +194,8 @@
 				<dict>
 					<key>Comment</key>
 					<string>Change HECI To IMEI</string>
+					<key>Disabled</key>
+					<false/>
 					<key>Find</key>
 					<data>
 					SEVDSQ==
@@ -202,6 +208,8 @@
 				<dict>
 					<key>Comment</key>
 					<string>change SAT0 to SATA, optionally pair with SSDT-SATA.aml</string>
+					<key>Disabled</key>
+					<false/>
 					<key>Find</key>
 					<data>
 					U0FUMA==
@@ -368,6 +376,8 @@
 				<string>#xh_rvp07</string>
 			</dict>
 		</array>
+		<key>FixHeaders</key>
+		<true/>
 		<key>RenameDevices</key>
 		<dict>
 			<key>_SB.PCI0.RP05.PXSX</key>
@@ -405,7 +415,7 @@
 			<string>SSDT-USBX.aml</string>
 			<string>SSDT-PTSWAK.aml</string>
 			<string>SSDT-PRW.aml</string>
-			<string>#SSDT-NVME.aml</string>
+			<string>SSDT-NVME.aml</string>
 			<string>SSDT-DMAC.aml</string>
 			<string>SSDT-MCHC.aml</string>
 			<string>SSDT-MEM2.aml</string>
@@ -432,7 +442,7 @@
 		<key>Timeout</key>
 		<integer>2</integer>
 		<key>XMPDetection</key>
-		<true/>
+		<integer>1</integer>
 	</dict>
 	<key>CPU</key>
 	<dict>
@@ -454,7 +464,7 @@
 		<key>Audio</key>
 		<dict>
 			<key>Inject</key>
-			<string>0</string>
+			<integer>0</integer>
 		</dict>
 		<key>NoDefaultProperties</key>
 		<false/>
@@ -495,6 +505,11 @@
 	</dict>
 	<key>Graphics</key>
 	<dict>
+		<key>EDID</key>
+		<dict>
+			<key>Inject</key>
+			<false/>
+		</dict>
 		<key>Inject</key>
 		<dict>
 			<key>ATI</key>
@@ -504,16 +519,14 @@
 			<key>NVidia</key>
 			<false/>
 		</dict>
-		<key>InjectEDID</key>
-		<false/>
 		<key>ig-platform-id</key>
 		<string>0</string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
-		<key>AppleRTC</key>
+		<key>AppleIntelCPUPM</key>
 		<false/>
-		<key>AsusAICPUPM</key>
+		<key>AppleRTC</key>
 		<false/>
 		<key>Debug</key>
 		<false/>
@@ -521,11 +534,11 @@
 		<true/>
 		<key>KernelCpu</key>
 		<false/>
-		<key>KernelHaswellE</key>
-		<false/>
 		<key>KernelLapic</key>
 		<false/>
 		<key>KernelPm</key>
+		<false/>
+		<key>KernelXCPM</key>
 		<false/>
 		<key>KextsToPatch</key>
 		<array>
