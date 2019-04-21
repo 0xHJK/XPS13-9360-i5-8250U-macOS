@@ -1,0 +1,71 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0\cname textColor;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf2 USB Anschl\'fcsse Patchen
+\f1\b0 \
+\
+Ab macOS 10.14.1 funktionieren die \'93USB port limit patches\'94 nicht mehr, somit werden nicht alle USB Anschl\'fcsse mit ihren technischen M\'f6glichkeiten bereitgestellt. RehabMan hat seinen USBInjectAll.kext erweitert, um verschiedene \'93boot flags\'94 f\'fcr das Ausklammern diverser Anschl\'fcsse zu erm\'f6glichen.\
+Mit vorliegender Variante wird diese Funktion genutzt, um einen eigenst\'e4ndigen Kext zu erstellen, der sowohl die Anschl\'fcsse eindeutig deklariert, als auch deren Eigenschaften festlegt.\
+\
+1. Lege den {\field{\*\fldinst{HYPERLINK "https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/"}}{\fldrslt \cf0 USBInjectAll.kext}} zur Anschlusserkennung in EFI/CLOVER/kexts/Other auf der versteckten EFI-Partition.\
+USBInjectAll.kext ben\'f6tigt in der config.plist von Clover folgende ACPI-Eintr\'e4ge/Patches:\
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf2 {\listtext	\uc0\u8226 	}Rename XHCI -> XHC\
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf2 {\listtext	\uc0\u8226 	}Rename XHC1 -> XHC\
+{\listtext	\uc0\u8226 	}Rename EHC1 -> EH01\
+{\listtext	\uc0\u8226 	}Rename EHC2 -> EH02\
+2. Neu starten\
+3. Starte Hackintool und schaue unter General->Installierte Kexte, ob USBInjectAll erfolgreich installiert und geladen wurde\
+{\listtext	\uc0\u8226 	}Bsp. USBInjectAll: Yes (Release-0.7.1)\
+4. Gehe zum Reiter General->USB, um die vorhandenen USB Controller in der entsprechenden Liste zu pr\'fcfen. Je nach vorhandenem USB Controller muss/kann ggf. ein weiterer USB-Kext installiert werden:\
+{\listtext	\uc0\u8226 	}8086:8CB1 und macOS < 10.11.1 = XHCI-9-series.kext\
+{\listtext	\uc0\u8226 	}8086:8D31, 8086:A2AF, 8086:A36D, 8086:9DED = XHCI-unsupported.kext\
+{\listtext	\uc0\u8226 	}8086:1E31, 8086:8C31, 8086:8CB1, 8086:8D31, 8086:9C31, 8086:9CB1 = FakePCIID.kext + FakePCIID_XHCIMux.kext\
+5. Installiere den entsprechenden Kext, starte den Rechner neu und \'f6ffne Hackintool erneut\
+6. Gehe zum Reiter General->USB\
+7. Markiere alle Elemente der USB Anschluss-Liste und w\'e4hle nacheinander die \'93Entfernen\'94 und \'93Aktualisieren\'94 Schaltfl\'e4che\
+8. Setze in der config.plist das Boot-Flag \'93-uia_exclude_ss uia_include=HS01,HS02\'94 und starte den Rechner neu\
+{\listtext	\uc0\u8226 	}ACHTUNG: \'c4ndere die Anschl\'fcsse HS01,HS02 auf diejenigen, an denen deine Maus und Tastatur angebunden sind\
+9. Starte Hackintool und gehe zum Reiter General->USB\
+{\listtext	\uc0\u8226 	}Schliesse ein USB 2.0 Ger\'e4t nacheinander an alle vorhandenen USB Anschl\'fcsse deines Systems an\
+{\listtext	\uc0\u8226 	}Dadurch werden die gefundenen aktiven Anschl\'fcsse gr\'fcn hervorgehoben\
+10. Entferne alle nicht gr\'fcn hervorgehobenen Anschl\'fcsse\
+11. Setze in der config.plist das Boot-Flag \'93-uia_exclude_hs\'94, entferne \'93-uia_exclude_ss\'94 und starte den Rechner neu (Achte darauf, dass \'93uia_include=\'85\'94 f\'fcr deine Maus und Tastatur stehenbleibt)\
+12. \'d6ffne Hackintool und gehe zum Reiter General->USB\
+{\listtext	\uc0\u8226 	}Schliesse ein USB 3.0 Ger\'e4t nacheinander an alle vorhandenen USB Anschl\'fcsse deines Systems an\
+{\listtext	\uc0\u8226 	}Schliesse ein USB TypeC Ger\'e4t an alle vorhandenen TypeC Anschl\'fcsse an (in beiden Ausrichtungen)\
+{\listtext	\uc0\u8226 	}Dadurch werden die gefundenen aktiven Anschl\'fcsse gr\'fcn hervorgehoben\
+13. Entferne alle nicht gr\'fcn hervorgehobenen Anschl\'fcsse\
+14. Setze \'fcber die Drop-Down-Liste f\'fcr jeden Anschluss den passenden Connector-Typ\
+{\listtext	\uc0\u8226 	}USB Anschl\'fcsse mit dauerhaft verbundenen Ger\'e4ten (z.B. Bluetooth aus WLAN/BT-Kombi-Karte) sollten als \'93Internal\'94 deklariert werden\
+{\listtext	\uc0\u8226 	}USB2 (HSxx) Anschl\'fcsse die \'fcber eine USB3-Buchse verbunden werden, sollten als \'93USB3\'94 deklariert werden\
+{\listtext	\uc0\u8226 	}Interne USB-HUBs, welche standardm\'e4\'dfig \'fcber die ACPI-Ger\'e4te PR11 und PR21 erreichbar sind, sollten als \'93Internal\'94 deklariert werden\
+TypeC:\
+{\listtext	\uc0\u8226 	}Wenn bei verschiedener Ausrichtung der gleiche HSxx/SSxx Anschluss benutzt wird, enth\'e4lt der TypeC Anschluss einen internen Umschalter und sollte als \'93TypeC+Sw\'94 deklariert werden\
+{\listtext	\uc0\u8226 	}Wenn bei verschiedener Ausrichtung unterschiedliche HSxx/SSxx Anschl\'fcsse benutzt werden, enth\'e4lt der TypeC Anschluss keinen internen Umschalter und sollte als \'93TypeC\'94 deklariert werden\
+15. Benutze die \'93Exportieren\'94 Schaltfl\'e4che um das Ergebnis als Datei auf deinem Schreibtisch zu speichern\
+{\listtext	\uc0\u8226 	}Kopiere den USBPorts.kext nach /EFI/CLOVER/kexts/Other\
+{\listtext	\uc0\u8226 	}Wurde eine SSDT-EC.aml-Datei erstellt, kopiere diese nach /EFI/CLOVER/ACPI/patched\
+16. Nun k\'f6nnen die nicht mehr ben\'f6tigten Kexte und Einstellungen bereinigt werden:\
+{\listtext	\uc0\u8226 	}Entferne unn\'f6tige Boot-Flags (-uia_exclude_ss -uia_exclude_hs uia_include=x)\
+{\listtext	\uc0\u8226 	}Entferne den USBInjectAll.kext\
+{\listtext	\uc0\u8226 	}Entferne die Clover Renames (XHC, EH01, EH02)\
+17. Starte den Rechner neu\
+18. \'d6ffne Hackintool und gehe zum Reiter General->USB\
+19. Markiere alle Elemente der USB Anschluss-Liste und w\'e4hle nacheinander die \'93Entfernen\'94 und \'93Aktualisieren\'94 Schaltfl\'e4che\
+{\listtext	\uc0\u8226 	}Damit kannst du pr\'fcfen, ob alle vorher deklarierten Anschl\'fcsse korrekt eingelesen werden\
+{\listtext	\uc0\u8226 	}Wenn du einen Connector-Typ mit dem Hackingtool \'e4ndern m\'f6chtest, musst du im Nachgang den USBPorts.kext wieder exportieren und den aktuell eingesetzten Kext ersetzen\
+{\listtext	\uc0\u8226 	}Sollte dir ein Fehler unterlaufen sein, l\'f6sche alle Ergebnisse und beginne von vorne\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \
+Q. Was ist der USBPorts.kext?\
+A. Das ist eine {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KEXTConcept/KEXTConceptAnatomy/kext_anatomy.html#//apple_ref/doc/uid/20002364-SW8"}}{\fldrslt \cf0 Codeless Kernel Extension}} zur Deklaration der verschiedenen USB Anschl\'fcsse\
+Q. Ben\'f6tige ich dazu eine SSDT-UIAC.aml?\
+A. Nein, wird hier nicht ben\'f6tigt, da die \'93codeless\'94 Kext ausreicht}

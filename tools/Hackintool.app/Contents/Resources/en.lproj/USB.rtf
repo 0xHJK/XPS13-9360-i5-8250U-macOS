@@ -1,0 +1,72 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0\cname textColor;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf2 USB Port Patching
+\f1\b0 \
+\
+macOS 10.14.1+ does not work with the USB port limit patch and therefore there is no way to have all ports available to configure at one time. RehabMan has updated USBInjectAll.kext to include boot flags for excluding groups of ports\
+\
+1. Place the {\field{\*\fldinst{HYPERLINK "https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/"}}{\fldrslt \cf0 USBInjectAll.kext}} (for port discovery) into EFI/CLOVER/kexts/Other\
+USBInjectAll.kext Requirements:\
+2. Clover->DSDT Renames (if detected)\
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf2 {\listtext	\uc0\u8226 	}XHCI -> XHC\
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf2 {\listtext	\uc0\u8226 	}XHC1 -> XHC\
+{\listtext	\uc0\u8226 	}EHC1 -> EH01\
+{\listtext	\uc0\u8226 	}EHC2 -> EH02\
+3. Reboot\
+4. Run Hackintool then go to General->Installed to check USBInjectAll is installed correctly\
+{\listtext	\uc0\u8226 	}Eg. USBInjectAll: Yes (Release-0.7.1)\
+5. Go to the General->USB tab to check your USB Controllers list. Based on your USB Controller you may need to install additional kexts:\
+{\listtext	\uc0\u8226 	}8086:8CB1 and macOS < 10.11.1 -> XHCI-9-series.kext\
+{\listtext	\uc0\u8226 	}8086:8D31, 8086:A2AF, 8086:A36D, 8086:9DED -> XHCI-unsupported.kext\
+{\listtext	\uc0\u8226 	}8086:1E31, 8086:8C31, 8086:8CB1, 8086:8D31, 8086:9C31, 8086:9CB1 -> FakePCIID.kext + FakePCIID_XHCIMux.kext\
+6. Reboot if you need to install one of the additional kexts then run Hackintool again\
+7. Go to the General->USB tab\
+8. Select all items in the USB Ports list and select the \'93Delete\'94 then the \'93Refresh\'94 button\
+9. Reboot with -uia_exclude_ss uia_include=HS01,HS02 boot flags\
+{\listtext	\uc0\u8226 	}Change the HS01,HS02 ports to the ones you have your mouse and keyboard attached\
+10. Run Hackintool and go to the General->USB tab\
+{\listtext	\uc0\u8226 	}Plug and unplug a USB 2.0 device into all ports on your system\
+{\listtext	\uc0\u8226 	}The ports that are active will remain highlighted green\
+11. Delete all ports that are not highlighted green\
+12. Reboot with -uia_exclude_hs boot flag and remove the -uia_exclude_ss boot flag\
+13. Run Hackintool and go to the General->USB tab\
+{\listtext	\uc0\u8226 	}Plug and unplug a USB 3.0 device into all ports on your system\
+{\listtext	\uc0\u8226 	}Plug and unplug a TypeC device into all ports (in both orientations)\
+{\listtext	\uc0\u8226 	}The ports that are active will remain highlighted green\
+14. Delete all ports that are not highlighted green\
+15. Set each port to the appropriate Connector using the drop down list\
+{\listtext	\uc0\u8226 	}USB ports with devices permanently attached (eg. M.2 Bluetooth card) should be set to \'93Internal\'94\
+{\listtext	\uc0\u8226 	}HSxx ports connected to USB3 ports should be set to USB3\
+{\listtext	\uc0\u8226 	}Internal HUBs are typically connected to ports PR11 and PR21 and therefore should be set to \'93Internal\'94\
+TypeC:\
+{\listtext	\uc0\u8226 	}If it uses the same HSxx/SSxx in both orientations, then it has an internal switch (use \'93TypeC+Sw\'94)\
+{\listtext	\uc0\u8226 	}If it uses a different HSxx/SSxx in each orientation, then it has no switch (use \'93TypeC\'94)\
+16. Use the \'93Export\'94 button to generate files to your Desktop\
+{\listtext	\uc0\u8226 	}Copy SSDT-EC.aml (if created) to EFI/CLOVER/ACPI/patched\
+{\listtext	\uc0\u8226 	}Choose one of the following two:\
+{\listtext	\uc0\u8226 	}A) Copy USBPorts.kext to EFI/CLOVER/kexts/Other or;\
+{\listtext	\uc0\u8226 	}B) Copy SSDT-UIAC.aml and SSDT-USBX.aml (if created) to EFI/CLOVER/ACPI/patched\
+17. You can now perform a clean up and remove unnecessary files:\
+{\listtext	\uc0\u8226 	}Remove custom boot flags (-uia_exclude_ss -uia_exclude_hs uia_include=x)\
+{\listtext	\uc0\u8226 	}Remove USBInjectAll.kext\
+18. Reboot\
+19. Run Hackintool and go to the General->USB tab\
+20. Select all items in the USB Ports list and select the \'93Delete\'94 then the \'93Refresh\'94 button\
+{\listtext	\uc0\u8226 	}Now you can check all ports are working correctly\
+{\listtext	\uc0\u8226 	}If you need to change a Connector type you will need to export your USBPorts.kext over the current one\
+{\listtext	\uc0\u8226 	}If you made a mistake delete USBPorts.kext and start from the beginning of the instructions again\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \
+Q. What is USBPorts.kext?\
+A. It's a {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KEXTConcept/KEXTConceptAnatomy/kext_anatomy.html#//apple_ref/doc/uid/20002364-SW8"}}{\fldrslt \cf0 Codeless Kernel Extension}} used to inject the USB ports\
+Q. Do I need SSDT-UIAC.aml?\
+A. No, this method uses a codeless kext}
