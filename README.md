@@ -83,7 +83,7 @@ sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallme
 
 ![create-usb](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/create-usb.png)
 
-4. 用tools目录下的Clover Configuration挂载**U盘的EFI分区**（注意不要挂错了），然后把所有东西复制到EFI分区的EFI目录内。
+4. 用tools目录下的Clover Configuration挂载**U盘的EFI分区**（注意不要挂错了），然后把本项目中所有文件复制到EFI分区的EFI目录内。
 
 
 
@@ -155,7 +155,7 @@ sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallme
 
 这个时候U盘应该可以正常启动（按F8选择从U盘启动）了，如果开机启动项里面没有找到U盘，可以在BIOS里面手动添加一个启动项，启动项路径为/EFI/EFI/CLOVER/CLOVERX64.efi
 
-启动成功后应该进入了CLOVER界面，选择启动Shell，启动的是位于CLOVER/tools目录下的Shell64U.efi。这个Shell是用于修改BIOS配置，另一个Shell已经重命名为Shell64U.efi.bak，如果修改完BIOS配置后有需要的话，可以将Shell64U.efi.bak改回来（一般情况下不需要这么做）。
+启动成功后应该进入了CLOVER界面，选择启动Shell，启动的是位于CLOVER/tools目录下的Shell64U.efi。这个Shell是用于修改BIOS配置，另一个Shell已经重命名为Shell64U.efi.bak，如果修改完BIOS配置后有需要的话，可以将Shell64U.efi.bak改回来~~（一般情况下不需要这么做）~~（修改启动声音大小时需要这么做）。
 
 进入Shell以后主要修改以下三项：
 
@@ -179,7 +179,7 @@ setup_var 0x786 0x03
 
 重启之后到CLOVER界面选择Install macOS Mojave，如果能正常启动的话，那就恭喜了。如果不能正常启动，建议回到CLOVER界面，选择Options，在启动参数里面（按回车开始输入，按回车结束输入）加上-v看看详细报错然后去网上查查资料。
 
-进入安装界面后，先选择磁盘工具对磁盘进行格式化，注意左上角选择显示所有设备，格式选择APFS，不要区分大小写，不然安装不了Adobe系列产品。然后选择磁盘后就可以开始安装了。
+进入安装界面后，先选择磁盘工具对磁盘进行格式化，注意左上角选择显示所有设备，然后选择目标磁盘，格式选择APFS，**不要区分大小写，不然安装不了Adobe系列产品**。格式化完成后选择目标磁盘后就可以开始安装了。
 
 安装过程中会重启多次，如果没找到正确的启动项，可以手动选择一下。
 
@@ -187,13 +187,15 @@ setup_var 0x786 0x03
 
 ## 后续设置
 
-到目前为止，启动还是通过U盘里的CLOVER引导的，所以第一件事情是把CLOVER安装到硬盘上。同样用Clover Configuration挂载**电脑硬盘的EFI分区**，和U盘一样，把文件复制进去，大概如下所示。
+到目前为止，启动还是通过U盘里的CLOVER引导的，所以第一件事情是把CLOVER安装到硬盘上。同样用Clover Configurator挂载**电脑硬盘的EFI分区**，和U盘一样，把文件复制进去，大概如下所示。
 
 ![image-20181016133944461](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/efi-list.png)
 
 然后运行终端，cd到该目录下，根据需要运行以下命令：
 
 ```bash
+# CD到该目录（先挂载）
+cd /Volumes/EFI/EFI
 # 编译DSDT
 bash XPS9360.sh --compile-dsdt
 # 允许安装第三方程序
@@ -208,7 +210,7 @@ bash XPS9360.sh --disable-touchid
 bash install.sh
 ```
 
-然后用Clover Configuration随机生成以下几个序列号：
+然后用Clover Configurator打开`EFI/Clover/config.plist`文件，随机生成以下几个序列号：
 
 ![image-20181016134503963](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/smbios.png)
 
@@ -220,7 +222,12 @@ bash install.sh
 
 ![image-20181016135223846](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/kexts.png)
 
+![](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/repair.png)
+
+> 如果Kext Wizard无法正常使用的话，也可以用Kext Utility，把那两个kext拖到窗口内即可
+
 ## 解决耳机没有声音的办法
+
 进入`EFI/ComboJack`目录，运行命令`bash install.sh`
 
 参考
@@ -257,6 +264,8 @@ bash install.sh
 
 ## 解决无法连接app store的办法
 
+> iMessage/iCloud/AirDrop 等出现问题也可以试试本方法
+
 连接不上app store的核心原因在于网卡名字不是`en0`，这个可以通过`ifconfig -a`或「关于本机-系统报告-Wi-Fi」处查看。
 
 首先，删除网络偏好设置中所有网卡。
@@ -286,6 +295,13 @@ $ cat com.apple.Boot.plist
 
 注意：如果不放心的话，以上步骤建议可以先备份原文件
 
+## 找不到硬盘
+如果使用的是海力士的SSD，欢迎使用@April-5 提供的`config-hynix.plist`配置文件，只需要改名成`config.plist`即可（原`config.plist`建议备份）。
+
+如果使用的是其他硬盘而找不到的，建议寻找一下其他配置，或更换硬盘（可以试试SM961）
+
+## 关于双系统
+我安装的是黑苹果单系统，有双系统安装需求的同学建议先安装macOS，再用mac中的Boot Camp Assistant安装Windows，可以减少很多麻烦。
 
 ## The End
 整个安装过程到此就全部结束了，可以重启试试是不是所有功能都运行正常。如果不正常的话，需要自己检查一下问题出在哪里。
@@ -294,12 +310,16 @@ $ cat com.apple.Boot.plist
 
 如果碰到问题，欢迎在issues中提出，如果有解决办法也欢迎补充。
 
-## 推广链接
-欢迎点击我的推广链接购买
-- XPS13 京东自营：<https://u.jd.com/3IjxzB>
-- XPS13 京东自营 白色：<https://u.jd.com/pEEwgl>
-- DA300转换适配器 京东自营：<https://u.jd.com/ONafW4>
+## 相关产品链接
+
+- XPS13 9360 京东自营：<https://u.jd.com/9ihbzJ>
+- 戴尔U2718Q 4K显示器 京东自营：<https://u.jd.com/WuXQes>
+- DA300转换适配器 京东自营：<https://u.jd.com/WhwiRv>
 - DA200转换适配器 京东自营：<https://u.jd.com/TFBA2u>
+- 网卡购于淘宝，目前已下架，可以参考<https://github.com/RehabMan/OS-X-BrcmPatchRAM>中的Tested PatchRAM devices购买（欢迎推荐可以完美使用的网卡）
+
+## 用爱发电
+![wepay](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/wepay.jpg)
 
 ## Credits
 
