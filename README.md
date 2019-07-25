@@ -8,12 +8,14 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 
 > ⚠警告：安装和使用黑苹果时经常会碰到意外，**千万千万要做好数据备份**
 >
-> ⚠建议：安装完成后关闭系统更新，更新比较容易出问题
+> ⚠建议：安装完成后关闭系统更新，更新比较容易出问题。
 
 ## 更新记录
+
+- 2019-07-25 重装系统（非升级）更新到了10.14.5，更新了EFI，启动速度变快，稳定性变高
 - 2019-04-05 今天手贱更新10.14.4结果启动不起来了，然后又重新搞了一份配置，更新了驱动，顺便解决了很多人碰到的声音问题。目前系统运行正常
 - 2019-01-14 修正内存显示与实际情况不一致的问题。建议自行在“SMBIOS->Memory”一栏自行补充内存信息，写法参考config-example.plist文件
-- 2018-12-21 系统更新为10.14.2 出现找不到触控板的情况，已经更新触控板驱动，现在运行正常。如果出现触控板问题请重新安装触控板驱动：<https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller>
+- 2018-12-21 系统更新为10.14.2 出现找不到触控板的情况，已经更新触控板驱动，现在运行正常。~~如果出现触控板问题请重新安装触控板驱动：<https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller>~~
 - 2018-11-02 系统更新为10.14.1 运行正常
 
 ## 硬件配置参考
@@ -26,6 +28,8 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 - SSD：KXG50ZNV256G NVMe TOSHIBA 256GB
 - 无线网卡：Dell DW1560 BCM94352Z （购于淘宝自行更换）
 
+> QQ群里有使用原装网卡的方案，喜欢折腾的同学可以进群了解。
+
 配件及外接设备：
 
 - USB Type-C转接器：Dell DA300（含有线网卡）
@@ -37,7 +41,7 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 
 系统及BIOS：
 
-- 系统：macOS 10.14 Mojave（单系统，没有Windows）
+- 系统：macOS 10.14.5  Mojave（单系统，没有Windows）
 - BIOS：2.9.1
 
 ## 使用情况说明
@@ -55,7 +59,7 @@ Hackintosh macOS Mojave 10.14 on XPS13-9360  黑苹果10.14安装配置及教程
 - WiFi可用
 - Airdrop可用
 - 睡眠可唤醒
-- 耗电情况正常，感觉续航还行
+- 耗电情况正常，续航基本能用一天
 - 发热情况正常
 
 存在的问题：
@@ -84,6 +88,10 @@ sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallme
 ![create-usb](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/create-usb.png)
 
 4. 用tools目录下的Clover Configuration挂载**U盘的EFI分区**（注意不要挂错了），然后把本项目中所有文件复制到EFI分区的EFI目录内。
+
+![mount-efi](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/mount.jpg)
+
+> 很多人表示在U盘中找不到EFI分区，我又重新制作了一遍启动U盘。如果严格按照流程来操作，U盘中会有EFI分区。系统尽量使用在App Store下载的原版系统，使用第三方修改的系统可能会有问题。
 
 
 
@@ -191,7 +199,7 @@ setup_var 0x786 0x03
 
 ![image-20181016133944461](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/efi-list.png)
 
-然后运行终端，cd到该目录下，根据需要运行以下命令：
+然后运行终端，cd到该目录下，根据需要（非必须）运行以下命令：
 
 ```bash
 # CD到该目录（先挂载）
@@ -312,10 +320,13 @@ $ cat com.apple.Boot.plist
 
 ## 相关产品链接
 
-- XPS13 9360 京东自营：<https://u.jd.com/9ihbzJ>
-- 戴尔U2718Q 4K显示器 京东自营：<https://u.jd.com/WuXQes>
-- DA300转换适配器 京东自营：<https://u.jd.com/WhwiRv>
-- DA200转换适配器 京东自营：<https://u.jd.com/TFBA2u>
+- 【楼主同款】XPS13 9360 京东自营：<https://u.jd.com/EYxXhT>
+- XPS15 京东自营：<https://u.jd.com/0uP8lg>
+- 【楼主同款】闪迪64G U盘 京东自营：<https://u.jd.com/7nAoYU>
+- 【楼主同款】戴尔U2718Q 4K显示器 京东自营：<https://u.jd.com/z5pDlr>
+- 【楼主同款】DA300转换适配器 京东自营：<https://u.jd.com/FWjSys>
+- DA200转换适配器 京东自营：<https://u.jd.com/pcJU0J>
+- 绿联Type-c扩展坞 京东自营：<https://u.jd.com/BjK2A5>
 - 网卡购于淘宝，目前已下架，可以参考<https://github.com/RehabMan/OS-X-BrcmPatchRAM>中的Tested PatchRAM devices购买（欢迎推荐可以完美使用的网卡）
 
 ## 用爱发电
