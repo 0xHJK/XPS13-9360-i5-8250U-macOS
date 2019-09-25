@@ -79,6 +79,8 @@ Github地址：<https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS>
 
 从这里开始是教程真正开始的部分，首先要做好系统安装失败崩溃无数次的心理准备。然后准备一个大于8G（推荐16G以上）的U盘，和运行macOS系统的电脑就可以开始了。用苹果电脑制作是为了获得原版镜像，当然也可以用Windows制作，可以查找一下相关教程。
 
+苹果官方镜像下载和安装器制作教程；https://support.apple.com/zh-cn/HT201372
+
 1. 从App Store下载镜像，大约半小时。
 2. 在磁盘工具左上角选择显示所有设备，格式化U盘，GUID分区，格式为Mac OS Extended      (Journaled)，名字为USB。
 3. 把镜像写入到U盘：
