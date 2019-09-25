@@ -81,12 +81,20 @@ Github地址：<https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS>
 
 苹果官方镜像下载和安装器制作教程；https://support.apple.com/zh-cn/HT201372
 
+也可以考虑使用UniBeast来制作：https://www.tonymacx86.com/threads/unibeast-install-macos-mojave-on-any-supported-intel-based-pc.259381/#create_unibeast
+
+下载链接：
+
+- [macOS 10.14 Mojave](https://itunes.apple.com/cn/app/macos-mojave/id1398502828?mt=12)
+- [macOS 10.13 High Sierra](https://itunes.apple.com/cn/app/macos-high-sierra/id1246284741?ls=1&mt=12)  
+- [macOS 10.12 Sierra](https://itunes.apple.com/cn/app/macos-sierra/id1127487414?ls=1&mt=12)
+
 1. 从App Store下载镜像，大约半小时。
 2. 在磁盘工具左上角选择显示所有设备，格式化U盘，GUID分区，格式为Mac OS Extended      (Journaled)，名字为USB。
-3. 把镜像写入到U盘：
+3. 把镜像写入到U盘（以Mojave为例）：
 
 ```bash
-sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macOS\ Mojave.app --nointeraction
+sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
 
 ![create-usb](https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS/raw/master/docs/create-usb.png)
