@@ -7,7 +7,16 @@ Github地址：<https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS>
 网络上中文资料很少，尤其是8代CPU的XPS。而我又是一个原版镜像控，又追求最新版的系统和软件，资料更是少之又少。搞这个东西前前后后搞了一个多月，系统崩溃重装无数次，现在终于稳定，各项功能基本和白苹果一致，故记录成文给后来者一个参考。
 
 XPS黑苹果交流QQ群：980197002（已满）
+
 黑苹果交流QQ二群：1036366410
+
+微信公众号（会更新黑苹果教程）：黑星软件店
+
+传送门：
+
+[华硕Z370主板i7-8700k完美黑苹果配置](https://github.com/0xHJK/ASUS-Z370-F-i7-8700K-macOS)
+
+[台式机安装黑苹果通用指南（一）](https://mp.weixin.qq.com/s/KOZiXMBKx13EYeQrAn7E5g)
 
 > ⚠警告：安装和使用黑苹果时经常会碰到意外，**千万千万要做好数据备份**
 >
@@ -31,7 +40,7 @@ XPS黑苹果交流QQ群：980197002（已满）
 - SSD：KXG50ZNV256G NVMe TOSHIBA 256GB
 - 无线网卡：Dell DW1560 BCM94352Z （购于淘宝自行更换）
 
-> QQ群里有使用原装网卡的方案，喜欢折腾的同学可以进群了解。
+> QQ群里有使用macbook原装网卡的方案，喜欢折腾的同学可以进群了解。
 
 配件及外接设备：
 
@@ -86,6 +95,7 @@ XPS黑苹果交流QQ群：980197002（已满）
 
 下载链接：
 
+- [macOS 10.15 Catalina](https://itunes.apple.com/cn/app/macos-catalina/id1466841314?ls=1&mt=12)
 - [macOS 10.14 Mojave](https://itunes.apple.com/cn/app/macos-mojave/id1398502828?mt=12)
 - [macOS 10.13 High Sierra](https://itunes.apple.com/cn/app/macos-high-sierra/id1246284741?ls=1&mt=12)  
 - [macOS 10.12 Sierra](https://itunes.apple.com/cn/app/macos-sierra/id1127487414?ls=1&mt=12)
@@ -333,13 +343,13 @@ $ cat com.apple.Boot.plist
 
 ## 相关产品链接
 
-- 【楼主同款】XPS13 9360 京东自营：<https://u.jd.com/EYxXhT>
+- 【同款】XPS13 9360 京东自营：<https://u.jd.com/EYxXhT>
 - XPS15 京东自营：<https://u.jd.com/0uP8lg>
-- 【楼主同款】闪迪64G U盘 京东自营：<https://u.jd.com/7nAoYU>
-- 【楼主同款】戴尔U2718Q 4K显示器 京东自营：<https://u.jd.com/z5pDlr>
-- 【楼主同款】DA300转换适配器 京东自营：<https://u.jd.com/FWjSys>
-- DA200转换适配器 京东自营：<https://u.jd.com/pcJU0J>
-- 绿联Type-c扩展坞 京东自营：<https://u.jd.com/BjK2A5>
+- 【同款】闪迪64G U盘 京东自营：<https://u.jd.com/7nAoYU>
+- 【同款】戴尔U2718Q 4K显示器 京东自营：<https://u.jd.com/z5pDlr>
+- 【同款】DA300转换适配器 京东自营：<https://u.jd.com/fktqKA>
+- DA200转换适配器 京东自营：<https://u.jd.com/f2X2Fn>
+- 绿联Type-c扩展坞 京东自营：<https://u.jd.com/tYQCio>
 - 网卡购于淘宝，目前已下架，可以参考<https://github.com/RehabMan/OS-X-BrcmPatchRAM>中的Tested PatchRAM devices购买（欢迎推荐可以完美使用的网卡）
 
 ## 用爱发电
